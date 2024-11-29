@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderDashboard from "./HeaderDashboard";
 import defaultbg from "../../img/defaultBackground.jpg";
 import profile from "../../img/profile.jpeg";
@@ -14,6 +14,34 @@ import {
 import Footer from "./Footer";
 
 export default function Profile() {
+  const [infoProfile , setInfoProfile ] = useState({
+    name : '',
+    email: '',
+    tel :'' , 
+    imgProfile : '',
+    imgBgProfile :'' ,
+    urlFacebook :'',
+    urlInstagram :'',
+    urlLinkedIn :'' , 
+    urlTwitter :'' ,
+    password : ''
+  })
+  const [formDataInfo , setFormDataInfo ] = useState({
+    name : '',
+    email: '',
+    tel :'' 
+  })
+  const [formDataMedia, setFormDataMedia ] = useState({
+    urlFacebook :'',
+    urlInstagram :'',
+    urlLinkedIn :'' , 
+    urlTwitter :'' 
+  })
+  const [formDataImages, setFormDataImages ] = useState({
+    imgProfile : '',
+    imgBgProfile :'' 
+  })
+  
   return (
     <div className="w-5/6  bg-subDark h-screen overflow-y-scroll">
       <HeaderDashboard />
@@ -45,11 +73,11 @@ export default function Profile() {
               adipisicing elit. Illo, repudiandae?
             </div>
             <div className="w-2/6 ml-10 py-6 flex ">
-              <FontAwesomeIcon className="text-4xl mr-3" icon={faFacebook} />
-              <FontAwesomeIcon className="text-4xl mr-3" icon={faInstagram} />
-              <FontAwesomeIcon className="text-4xl mr-3" icon={faXTwitter} />
-              <FontAwesomeIcon className="text-4xl mr-3" icon={faLinkedin} />
-              <FontAwesomeIcon className="text-4xl mr-3" icon={faDiscord} />
+              <FontAwesomeIcon className="text-4xl mr-3 hover:cursor-pointer" icon={faFacebook} />
+              <FontAwesomeIcon className="text-4xl mr-3 hover:cursor-pointer" icon={faInstagram} />
+              <FontAwesomeIcon className="text-4xl mr-3 hover:cursor-pointer" icon={faXTwitter} />
+              <FontAwesomeIcon className="text-4xl mr-3 hover:cursor-pointer" icon={faLinkedin} />
+              <FontAwesomeIcon className="text-4xl mr-3 hover:cursor-pointer" icon={faDiscord} />
             </div>
           </div>
         </div>
@@ -58,7 +86,7 @@ export default function Profile() {
       <div className="w-[90%] mx-auto min-h-[50vh] mb-5 mt-2 flex flex-col lg:flex-row rounded-md overflow-hidden  ">
         <div className="w-full lg:w-[50%]">
           <form
-            action=""
+             onSubmit={(e)=> e.preventDefault()}
             className="flex flex-col h-fit mr-2 w-full bg-dark p-10"
           >
             <h1 className="text-3xl font-semibold text-center">Update info </h1>
@@ -69,6 +97,8 @@ export default function Profile() {
               id="name"
               className="my-3 text-lg rounded-sm text-white bg-subDark px-4 py-2"
               type="text"
+              value={formDataInfo.name}
+              onChange={(e)=>setFormDataInfo({...formDataInfo ,nama : e.target.value})}
               placeholder="Enter new name"
             />
             <label className="text-xl" htmlFor="email">
@@ -79,6 +109,8 @@ export default function Profile() {
               className="my-3 text-lg rounded-sm text-white bg-subDark px-4 py-2"
               type="email"
               placeholder="Enter new email"
+              value={formDataInfo.email}
+              onChange={(e)=>setFormDataInfo({...formDataInfo ,email : e.target.value})}
             />
             <label className="text-xl" htmlFor="tel">
               Tel
@@ -87,6 +119,8 @@ export default function Profile() {
               id="tel"
               className="my-3 text-lg rounded-sm text-white bg-subDark px-4 py-2"
               type="text"
+              value={formDataInfo.tel}
+              onChange={(e)=>setFormDataInfo({...formDataInfo ,tel : e.target.value})}
               placeholder="Enter new tel "
             />
 
@@ -97,9 +131,58 @@ export default function Profile() {
               Update profile
             </button>
           </form>
+          <form
+             onSubmit={(e)=> e.preventDefault()}
+            className="flex flex-col h-fit mr-2 w-full bg-dark p-10"
+          >
+            <h1 className="text-3xl font-semibold text-center">Edit password </h1>
+            <label className="text-xl" htmlFor="password">
+              Password
+            </label>
+            <input
+              id="password"
+              className="my-3 text-lg rounded-sm text-white bg-subDark px-4 py-2"
+              type="text"
+            
+              placeholder="Enter old password..."
+            />
+            <label className="text-xl" htmlFor="email">
+              New password 
+            </label>
+            <input
+              id="newPassword"
+              className="my-3 text-lg rounded-sm text-white bg-subDark px-4 py-2"
+              type="email"
+              placeholder="Enter new new password..."
+           
+            />
+            <label className="text-xl" htmlFor="tel">
+               Confiremed password
+            </label>
+            <input
+              id="confirmed_password"
+              className="my-3 text-lg rounded-sm text-white bg-subDark px-4 py-2"
+              type="text"
+            
+              placeholder="Enter confirmed password... "
+            />
 
-          <form action="" className="flex flex-col mt-2 w-full bg-dark p-10 ">
+            <button
+              className="my-3 rounded-sm text-white bg-blue-500 px-4 py-2 text-xl"
+              type="submit"
+            >
+              Update profile
+            </button>
+          </form>
+          <form   onSubmit={(e)=> e.preventDefault()} className="flex flex-col mt-2 w-full bg-dark p-10 ">
             <h1 className="text-3xl font-semibold text-center">Update image</h1>
+            {
+              formDataImages.imgProfile && (
+                <div className="w-20 h-20">
+              <img src={URL.createObjectURL(formDataImages.imgProfile)} alt="" />
+            </div>
+              )
+            }
             <label className="text-xl" htmlFor="imgProfile">
               Image Profile
             </label>
@@ -107,8 +190,17 @@ export default function Profile() {
               className="my-3 text-lg rounded-sm text-white bg-subDark px-4 py-2"
               type="file"
               id="imgProfile"
+             
+              onChange={(e)=>setFormDataImages({...formDataImages ,imgProfile : e.target.files[0]})}
               name="imgProfile"
             />
+             {
+               formDataImages.imgBgProfile && (
+                <div className="w-20 h-20">
+                <img src={URL.createObjectURL(formDataImages.imgBgProfile)} alt="" />
+              </div>
+               )
+             }
             <label className="text-xl" htmlFor="bgProfile">
               Background Profile
             </label>
@@ -116,7 +208,8 @@ export default function Profile() {
               className="my-3 text-lg rounded-sm text-white bg-subDark px-4 py-2"
               type="file"
               id="bgProfile"
-              name="imgProfile"
+              onChange={(e)=>setFormDataImages({...formDataImages , imgBgProfile : e.target.files[0]})}
+              name="bgProfile"
             />
             <button
               className="my-3 rounded-sm text-white bg-blue-500 px-4 py-2 text-xl"
@@ -128,7 +221,7 @@ export default function Profile() {
         </div>
         <div className="w-full lg:w-[50%]">
           <form
-            action=""
+            onSubmit={(e)=> e.preventDefault()}
             className="flex flex-col ml-0 mt-2 lg:mt-0 lg:ml-2 w-full bg-dark p-10"
           >
             <h1 className="text-3xl font-semibold text-center">
@@ -183,7 +276,7 @@ export default function Profile() {
           </form>
         </div>
       </div>
-      <form action="" className="lg:ml-20 ml-5 mb-20 lg:mb-[10vh] " method="post">
+      <form   onSubmit={(e)=> e.preventDefault()} className="lg:ml-20 ml-5 mb-20 lg:mb-[10vh] " method="post">
         <button
           className="my-3 rounded-sm text-white bg-red-700 px-4 py-2 text-xl"
           type="submit"
