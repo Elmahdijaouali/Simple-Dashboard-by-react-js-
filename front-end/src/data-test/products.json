@@ -1,0 +1,45 @@
+{
+    "products": [
+      {
+        "product_name": "Wireless Mouse",
+        "category": "Electronics",
+        "price": "$25.99",
+        "quantity": 150,
+        "create_at": "2024-01-15",
+        "updated_at": "2024-11-20"
+      },
+      {
+        "product_name": "Bluetooth Headphones",
+        "category": "Electronics",
+        "price": "$49.99",
+        "quantity": 85,
+        "create_at": "2023-09-10",
+        "updated_at": "2024-10-30"
+      },
+      {
+        "product_name": "Gaming Keyboard",
+        "category": "Electronics",
+        "price": "$89.99",
+        "quantity": 60,
+        "create_at": "2024-02-25",
+        "updated_at": "2024-11-10"
+      },
+      {
+        "product_name": "LED Desk Lamp",
+        "category": "Home & Office",
+        "price": "$35.00",
+        "quantity": 120,
+        "create_at": "2024-05-12",
+        "updated_at": "2024-11-05"
+      },
+      {
+        "product_name": "Smartphone Stand",
+        "category": "Accessories",
+        "price": "$15.00",
+        "quantity": 200,
+        "create_at": "2024-07-30",
+        "updated_at": "2024-11-15"
+      }
+    ]
+  }
+  
